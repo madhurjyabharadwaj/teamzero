@@ -139,7 +139,7 @@ const FounderBrief = () => {
     }
     setActiveProjectId(data.id);
     qc.invalidateQueries({ queryKey: ["projects"] });
-    navigate(`/founder/preview/${data.id}`);
+    navigate(`/founder/project/${data.id}`);
   };
 
   const errCls = (k: string) => (errors.has(k) ? "border-destructive" : "");
