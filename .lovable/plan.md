@@ -1,24 +1,51 @@
-# Fix broken navigation to project preview
+# Fix: Project preview stuck on "Loading…"
 
-## Problem
+## What's happening
 
-After submitting the Founder Brief, the app navigates to `/founder/preview/:id`, but the route is registered as `/founder/project/:id`. This lands users on the NotFound page (which is what you're seeing right now at `/founder/preview/32e71994-...`).
+After submitting the brief, you land on `/founder/project/<id>` and the page just shows "Loading…" with no project preview and no "Generate matches" button.
 
-Two files use the wrong path:
-- `src/pages/FounderBrief.tsx:142` — after creating a project
-- `src/pages/MatchResults.tsx:66` — back button to the preview
+## Root cause
 
-## Change
+The routes in `src/App.tsx` declare the URL parameter as `:projectId`:
 
-Replace `/founder/preview/${id}` with `/founder/project/${id}` in both files. This aligns with the already-registered routes:
-- `/founder/project/:projectId` (preview)
-- `/founder/project/:projectId/matches`
-- `/founder/project/:projectId/shortlist`
+```
+/founder/project/:projectId
+/founder/project/:projectId/matches
+/founder/project/:projectId/shortlist
+```
 
-## Verify
+But the page components read it as `id`:
 
-1. Run `tsc --noEmit` — should be clean.
-2. Walk the founder flow: Landing → Role → Founder Brief → submit → lands on Project Preview (not 404) → Matches → Shortlist.
-3. From Matches, the back button returns to Project Preview.
+```ts
+const { id } = useParams(); // id is undefined
+const { data: project } = useProject(id); // query disabled → never loads
+```
 
-No schema, business logic, or design changes — pure routing fix.
+Because `id` is `undefined`, the React Query hook stays disabled, so no fetch ever happens and the UI is permanently stuck on "Loading…".
+
+This affects three pages:
+- `src/pages/ProjectPreview.tsx`
+- `src/pages/MatchResults.tsx`
+- `src/pages/ShortlistInvites.tsx`
+
+## Fix (recommended)
+
+Change the three pages to destructure `projectId` instead of `id`, matching the route definition. Minimal, single-word rename per file. No route changes, no data changes.
+
+```ts
+const { projectId } = useParams();
+const { data: project } = useProject(projectId);
+// ...navigate(`/founder/project/${projectId}/matches`) etc.
+```
+
+## Verification
+
+1. Run `tsc --noEmit` — should stay green.
+2. Submit a new brief → preview page should now render the project card and the "Generate matches" button.
+3. Click "Generate matches" → matches list loads.
+4. Shortlist a candidate → shortlist page loads.
+
+## Out of scope
+
+- No DB changes, no RLS changes, no styling changes.
+- Not renaming routes (would touch more files for no benefit).
