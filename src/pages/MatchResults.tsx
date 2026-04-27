@@ -12,11 +12,11 @@ import { toast } from "sonner";
 import { ArrowLeft, ListChecks } from "lucide-react";
 
 const MatchResults = () => {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
-  const { data: project } = useProject(id);
+  const { data: project } = useProject(projectId);
   const { data: candidates = [] } = useCandidates();
-  const { data: invites = [] } = useInvites(id);
+  const { data: invites = [] } = useInvites(projectId);
   const qc = useQueryClient();
   const [pendingId, setPendingId] = useState<string | null>(null);
 
@@ -36,7 +36,7 @@ const MatchResults = () => {
     setPendingId(matchId);
     if (inviteByCandidate.get(matchId)) {
       setPendingId(null);
-      navigate(`/founder/shortlist/${project.id}`);
+      navigate(`/founder/project/${project.id}/shortlist`);
       return;
     }
     const { error } = await supabase.from("invites").insert({
@@ -73,7 +73,7 @@ const MatchResults = () => {
               {ranked.length} candidate{ranked.length === 1 ? "" : "s"} above the threshold · {strongCount} strong match{strongCount === 1 ? "" : "es"}
             </p>
           </div>
-          <Button onClick={() => navigate(`/founder/shortlist/${project.id}`)} variant="outline">
+          <Button onClick={() => navigate(`/founder/project/${project.id}/shortlist`)} variant="outline">
             <ListChecks className="h-4 w-4 mr-1.5" /> View shortlist ({invites.length})
           </Button>
         </div>
