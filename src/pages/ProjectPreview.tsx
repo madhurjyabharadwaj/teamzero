@@ -6,9 +6,9 @@ import { useProject } from "@/hooks/useTeamZeroData";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 const ProjectPreview = () => {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
-  const { data: project, isLoading } = useProject(id);
+  const { data: project, isLoading } = useProject(projectId);
   return (
     <div className="min-h-screen flex flex-col">
       <AppHeader />
@@ -25,7 +25,7 @@ const ProjectPreview = () => {
             <>
               <ProjectCard project={project} />
               <div className="mt-8 flex justify-end">
-                <Button size="lg" onClick={() => navigate(`/founder/matches/${project.id}`)} className="shadow-lift">
+                <Button size="lg" onClick={() => navigate(`/founder/project/${project.id}/matches`)} className="shadow-lift">
                   <Sparkles className="h-4 w-4 mr-2" /> Generate matches
                 </Button>
               </div>
