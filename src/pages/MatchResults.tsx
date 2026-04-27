@@ -63,7 +63,7 @@ const MatchResults = () => {
     <div className="min-h-screen flex flex-col">
       <AppHeader />
       <main className="container-page py-10 flex-1 max-w-4xl">
-        <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/preview/${project.id}`)}>
+        <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/project/${project.id}`)}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Back to preview
         </Button>
         <div className="mt-4 flex items-end justify-between gap-4 flex-wrap">
