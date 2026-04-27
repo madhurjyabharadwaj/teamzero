@@ -14,11 +14,11 @@ import { ArrowLeft, Send, Trash2 } from "lucide-react";
 import type { InviteStatus, MatchLabel } from "@/lib/types";
 
 const ShortlistInvites = () => {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const navigate = useNavigate();
-  const { data: project } = useProject(id);
+  const { data: project } = useProject(projectId);
   const { data: candidates = [] } = useCandidates();
-  const { data: invites = [] } = useInvites(id);
+  const { data: invites = [] } = useInvites(projectId);
   const qc = useQueryClient();
   const [messages, setMessages] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState<string | null>(null);
@@ -56,7 +56,7 @@ const ShortlistInvites = () => {
     <div className="min-h-screen flex flex-col">
       <AppHeader />
       <main className="container-page py-10 flex-1 max-w-4xl">
-        <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/matches/${project.id}`)}>
+        <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/project/${project.id}/matches`)}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Back to matches
         </Button>
         <h1 className="text-3xl font-bold tracking-tight mt-4">Shortlist & invites</h1>
