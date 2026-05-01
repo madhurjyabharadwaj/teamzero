@@ -21,17 +21,17 @@ export function AppHeader() {
   };
 
   return (
-    <header className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-30">
+    <header className="sticky top-0 z-30 border-b border-white/5 bg-background/40 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-            <Layers className="h-4 w-4" />
+        <Link to="/" className="group flex items-center gap-2.5 font-bold text-lg">
+          <span className="relative grid h-9 w-9 place-items-center rounded-xl gradient-iridescent text-primary-foreground shadow-glow">
+            <Layers className="h-4 w-4 relative z-10" />
           </span>
-          TeamZero
+          <span className="tracking-tight">TeamZero</span>
         </Link>
         <div className="flex items-center gap-3">
-          <Badge variant="outline" className="hidden sm:inline-flex font-normal">
-            Demo data
+          <Badge variant="outline" className="hidden sm:inline-flex font-normal border-white/10 bg-white/5 text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary-glow mr-1.5 animate-pulse" /> Demo
           </Badge>
           {role && (
             <>

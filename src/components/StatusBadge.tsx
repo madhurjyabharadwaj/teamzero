@@ -4,12 +4,12 @@ import type { InviteStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 const styles: Record<InviteStatus, string> = {
-  shortlisted: "bg-secondary text-secondary-foreground border-transparent",
-  invited: "bg-primary/10 text-primary border-primary/20",
-  interested: "bg-success/15 text-success border-success/30",
-  maybe_later: "bg-warning/20 text-warning-foreground border-warning/30",
+  shortlisted: "bg-white/5 text-foreground/80 border-white/10",
+  invited: "bg-primary/15 text-primary border-primary/30",
+  interested: "bg-success/15 text-success border-success/40",
+  maybe_later: "bg-warning/15 text-warning border-warning/30",
   not_a_fit: "bg-destructive/10 text-destructive border-destructive/30",
-  call_scheduled: "bg-success text-success-foreground border-transparent",
+  call_scheduled: "bg-success/30 text-success border-success/50",
 };
 
 export function StatusBadge({ status }: { status: InviteStatus }) {
