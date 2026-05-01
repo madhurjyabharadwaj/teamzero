@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { AppHeader } from "@/components/AppHeader";
+import { AmbientBackground } from "@/components/AmbientBackground";
+import { GlassCard } from "@/components/GlassCard";
+import { Reveal } from "@/components/Reveal";
 import { TagInput } from "@/components/TagInput";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
@@ -77,13 +79,15 @@ const required: Array<keyof FormState> = [
 ];
 
 const Section = ({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) => (
-  <Card className="p-6 shadow-soft space-y-5">
-    <div>
-      <h2 className="text-lg font-semibold">{title}</h2>
-      {hint && <p className="text-sm text-muted-foreground mt-0.5">{hint}</p>}
-    </div>
-    {children}
-  </Card>
+  <Reveal>
+    <GlassCard hover={false} className="p-6 space-y-5">
+      <div>
+        <h2 className="text-lg font-semibold">{title}</h2>
+        {hint && <p className="text-sm text-muted-foreground mt-0.5">{hint}</p>}
+      </div>
+      {children}
+    </GlassCard>
+  </Reveal>
 );
 
 const FounderBrief = () => {
@@ -146,10 +150,13 @@ const FounderBrief = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <AmbientBackground />
       <AppHeader />
-      <main className="container-page py-10 flex-1 max-w-3xl">
-        <h1 className="text-3xl font-bold tracking-tight">New project brief</h1>
-        <p className="text-muted-foreground mt-2">
+      <main className="container-page py-10 md:py-14 flex-1 max-w-3xl">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          New <span className="text-gradient">project brief</span>
+        </h1>
+        <p className="text-muted-foreground mt-3 text-lg">
           The clearer your brief, the better the matches. This takes about 5 minutes.
         </p>
 
@@ -376,7 +383,12 @@ const FounderBrief = () => {
         </div>
 
         <div className="mt-8 flex justify-end gap-3 sticky bottom-4">
-          <Button size="lg" onClick={onSubmit} disabled={saving} className="shadow-lift">
+          <Button
+            size="lg"
+            onClick={onSubmit}
+            disabled={saving}
+            className="h-12 px-7 gradient-iridescent text-primary-foreground border-0 shadow-glow btn-shimmer hover:opacity-95 transition-transform hover:scale-[1.02]"
+          >
             {saving ? "Saving…" : "Preview & generate matches"} <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
         </div>
