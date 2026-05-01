@@ -1,9 +1,10 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScorePill } from "@/components/ScorePill";
 import { MatchReasonList } from "@/components/MatchReasonList";
 import type { Match } from "@/lib/types";
 import { Button } from "@/components/ui/button";
+import { GlassCard } from "@/components/GlassCard";
 import { Clock, GraduationCap } from "lucide-react";
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 export function CandidateCard({ match, action, secondaryAction }: Props) {
   const c = match.candidate;
   return (
-    <Card className="shadow-soft hover:shadow-lift transition-shadow">
+    <GlassCard className="overflow-hidden">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3 flex-wrap">
           <div>
@@ -37,16 +38,26 @@ export function CandidateCard({ match, action, secondaryAction }: Props) {
       <CardContent className="space-y-4">
         <MatchReasonList reasons={match.reasons} />
         <div className="flex flex-wrap gap-1.5 pt-1">
-          {c.role_fits.slice(0, 3).map((r) => <Badge key={r} variant="outline" className="font-normal text-xs">{r}</Badge>)}
-          {c.skills.slice(0, 4).map((s) => <Badge key={s} variant="secondary" className="font-normal text-xs">{s}</Badge>)}
+          {c.role_fits.slice(0, 3).map((r) => <Badge key={r} variant="outline" className="font-normal text-xs border-primary/30 bg-primary/10 text-primary">{r}</Badge>)}
+          {c.skills.slice(0, 4).map((s) => <Badge key={s} variant="secondary" className="font-normal text-xs bg-white/5 border border-white/10">{s}</Badge>)}
         </div>
         {(action || secondaryAction) && (
-          <div className="flex gap-2 pt-2 border-t border-border">
+          <div className="flex gap-2 pt-3 border-t border-white/5">
             {secondaryAction && <Button variant="ghost" size="sm" onClick={secondaryAction.onClick}>{secondaryAction.label}</Button>}
-            {action && <Button size="sm" variant={action.variant ?? "default"} onClick={action.onClick} disabled={action.disabled} className="ml-auto">{action.label}</Button>}
+            {action && (
+              <Button
+                size="sm"
+                variant={action.variant ?? "default"}
+                onClick={action.onClick}
+                disabled={action.disabled}
+                className={`ml-auto ${action.variant === "outline" ? "border-white/15 bg-white/5" : "gradient-iridescent text-primary-foreground border-0 btn-shimmer hover:opacity-95"}`}
+              >
+                {action.label}
+              </Button>
+            )}
           </div>
         )}
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 }
