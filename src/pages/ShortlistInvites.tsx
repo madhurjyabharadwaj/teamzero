@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
+import { AmbientBackground } from "@/components/AmbientBackground";
+import { GlassCard } from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ScorePill } from "@/components/ScorePill";
@@ -49,30 +51,33 @@ const ShortlistInvites = () => {
   };
 
   if (!project) {
-    return <div className="min-h-screen"><AppHeader /><main className="container-page py-10"><p>Loading…</p></main></div>;
+    return <div className="min-h-screen"><AmbientBackground /><AppHeader /><main className="container-page py-10"><p>Loading…</p></main></div>;
   }
 
   return (
     <div className="min-h-screen flex flex-col">
+      <AmbientBackground />
       <AppHeader />
-      <main className="container-page py-10 flex-1 max-w-4xl">
+      <main className="container-page py-10 md:py-14 flex-1 max-w-4xl">
         <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/project/${project.id}/matches`)}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Back to matches
         </Button>
-        <h1 className="text-3xl font-bold tracking-tight mt-4">Shortlist & invites</h1>
-        <p className="text-muted-foreground mt-2">{project.title}</p>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mt-4">
+          Shortlist & <span className="text-gradient">invites</span>
+        </h1>
+        <p className="text-muted-foreground mt-3 text-lg">{project.title}</p>
 
         {invites.length === 0 ? (
-          <Card className="mt-8 p-6 text-center">
+          <GlassCard hover={false} className="mt-8 p-6 text-center">
             <p className="text-sm text-muted-foreground">Nothing on your shortlist yet. Add candidates from the matches page.</p>
-          </Card>
+          </GlassCard>
         ) : (
           <div className="grid gap-4 mt-8">
             {invites.map((inv) => {
               const c = candidateMap.get(inv.candidate_id);
               if (!c) return null;
               return (
-                <Card key={inv.id} className="shadow-soft">
+                <GlassCard key={inv.id} hover={false}>
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-3 flex-wrap">
                       <div>
@@ -100,7 +105,7 @@ const ShortlistInvites = () => {
                           <Button variant="ghost" size="sm" onClick={() => remove(inv.id)}>
                             <Trash2 className="h-4 w-4 mr-1" /> Remove
                           </Button>
-                          <Button size="sm" onClick={() => sendInvite(inv.id)} disabled={busy === inv.id}>
+                        <Button size="sm" onClick={() => sendInvite(inv.id)} disabled={busy === inv.id} className="gradient-iridescent text-primary-foreground border-0 btn-shimmer hover:opacity-95">
                             <Send className="h-4 w-4 mr-1.5" /> Send invite
                           </Button>
                         </div>
@@ -108,20 +113,20 @@ const ShortlistInvites = () => {
                     ) : (
                       <>
                         {inv.message && (
-                          <div className="text-sm bg-secondary/60 rounded-md p-3 border border-border">
+                          <div className="text-sm bg-white/5 rounded-lg p-3 border border-white/10">
                             <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-1">Your message</p>
                             {inv.message}
                           </div>
                         )}
                         {inv.candidate_note && (
-                          <div className="text-sm bg-primary-soft rounded-md p-3">
+                          <div className="text-sm bg-primary/10 border border-primary/20 rounded-lg p-3">
                             <p className="text-xs uppercase tracking-wider text-primary font-medium mb-1">Candidate replied</p>
                             {inv.candidate_note}
                           </div>
                         )}
                         {inv.status === "interested" && (
                           <div className="flex justify-end">
-                            <Button size="sm" variant="outline" onClick={() => updateStatus(inv.id, "call_scheduled")}>
+                            <Button size="sm" variant="outline" onClick={() => updateStatus(inv.id, "call_scheduled")} className="border-white/15 bg-white/5">
                               Mark call scheduled
                             </Button>
                           </div>
@@ -129,7 +134,7 @@ const ShortlistInvites = () => {
                       </>
                     )}
                   </CardContent>
-                </Card>
+                </GlassCard>
               );
             })}
           </div>
