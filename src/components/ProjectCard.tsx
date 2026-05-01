@@ -1,18 +1,19 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { GlassCard } from "@/components/GlassCard";
 import type { Project } from "@/lib/types";
 import { Briefcase, Clock } from "lucide-react";
 
 export function ProjectCard({ project, compact }: { project: Project; compact?: boolean }) {
   return (
-    <Card className="shadow-soft">
+    <GlassCard hover={false} className="overflow-hidden">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="font-semibold text-lg leading-tight">{project.title}</h3>
             <p className="text-sm text-muted-foreground mt-0.5">by {project.founder_name}</p>
           </div>
-          <Badge variant="secondary">{project.stage}</Badge>
+          <Badge variant="secondary" className="bg-white/5 border border-white/10 text-foreground/80">{project.stage}</Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-3">
@@ -32,16 +33,16 @@ export function ProjectCard({ project, compact }: { project: Project; compact?: 
           </>
         )}
         <div className="flex flex-wrap gap-1.5 pt-1">
-          <Badge variant="outline" className="gap-1 font-normal"><Briefcase className="h-3 w-3" /> {project.industry}</Badge>
-          <Badge variant="outline" className="gap-1 font-normal"><Clock className="h-3 w-3" /> {project.expected_hours}h/week · {project.expected_commitment}</Badge>
-          {project.roles_needed.map((r) => <Badge key={r} variant="outline" className="font-normal">{r}</Badge>)}
+          <Badge variant="outline" className="gap-1 font-normal border-white/10 bg-white/5"><Briefcase className="h-3 w-3" /> {project.industry}</Badge>
+          <Badge variant="outline" className="gap-1 font-normal border-white/10 bg-white/5"><Clock className="h-3 w-3" /> {project.expected_hours}h/week · {project.expected_commitment}</Badge>
+          {project.roles_needed.map((r) => <Badge key={r} variant="outline" className="font-normal border-primary/30 bg-primary/10 text-primary">{r}</Badge>)}
         </div>
         {!compact && project.skills_needed.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {project.skills_needed.map((s) => <Badge key={s} variant="secondary" className="font-normal text-xs">{s}</Badge>)}
+            {project.skills_needed.map((s) => <Badge key={s} variant="secondary" className="font-normal text-xs bg-white/5 border border-white/10">{s}</Badge>)}
           </div>
         )}
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 }
