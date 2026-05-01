@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { AppHeader } from "@/components/AppHeader";
+import { AmbientBackground } from "@/components/AmbientBackground";
+import { GlassCard } from "@/components/GlassCard";
 import { KpiTile } from "@/components/KpiTile";
-import { Card } from "@/components/ui/card";
 import { ProjectCard } from "@/components/ProjectCard";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useAllInvites, useCandidates, useProjects } from "@/hooks/useTeamZeroData";
@@ -38,10 +39,13 @@ const AdminDashboard = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <AmbientBackground />
       <AppHeader />
-      <main className="container-page py-10 flex-1">
-        <h1 className="text-3xl font-bold tracking-tight">Admin dashboard</h1>
-        <p className="text-muted-foreground mt-2">Track activity, outcomes, and where the ecosystem is short on supply.</p>
+      <main className="container-page py-10 md:py-14 flex-1">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          Admin <span className="text-gradient">dashboard</span>
+        </h1>
+        <p className="text-muted-foreground mt-3 text-lg">Track activity, outcomes, and where the ecosystem is short on supply.</p>
 
         <div className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
           <KpiTile label="Projects" value={projects.length} icon={Briefcase} hint="Founder briefs created" />
@@ -54,20 +58,20 @@ const AdminDashboard = () => {
           <div className="lg:col-span-2 space-y-4">
             <h2 className="text-xl font-semibold">Recent activity</h2>
             {invites.length === 0 && (
-              <Card className="p-6 text-center">
+              <GlassCard hover={false} className="p-6 text-center">
                 <p className="text-sm text-muted-foreground">No invites yet. Switch to Founder and create a brief.</p>
-              </Card>
+              </GlassCard>
             )}
             {invites.slice(0, 8).map((inv) => {
               const c = candidateMap.get(inv.candidate_id);
               const p = projectMap.get(inv.project_id);
               if (!c || !p) return null;
               return (
-                <Card key={inv.id} className="p-4 shadow-soft flex items-start justify-between gap-3 flex-wrap">
+                <GlassCard key={inv.id} className="p-4 flex items-start justify-between gap-3 flex-wrap">
                   <div className="min-w-0">
                     <p className="text-sm">
                       <span className="font-semibold">{p.founder_name}</span>{" "}
-                      <span className="text-muted-foreground">→</span>{" "}
+                      <span className="text-primary-glow">→</span>{" "}
                       <span className="font-semibold">{c.name}</span>
                     </p>
                     <p className="text-xs text-muted-foreground mt-1 truncate">{p.title} · score {inv.match_score ?? "—"}</p>
@@ -76,7 +80,7 @@ const AdminDashboard = () => {
                     {inv.candidate_note && <MessageSquare className="h-4 w-4 text-muted-foreground" />}
                     <StatusBadge status={inv.status as InviteStatus} />
                   </div>
-                </Card>
+                </GlassCard>
               );
             })}
           </div>
@@ -85,7 +89,7 @@ const AdminDashboard = () => {
             <h2 className="text-xl font-semibold flex items-center gap-2">
               <TrendingDown className="h-5 w-5 text-warning" /> Ecosystem gaps
             </h2>
-            <Card className="p-4 shadow-soft">
+            <GlassCard hover={false} className="p-4">
               <p className="text-xs text-muted-foreground mb-3">Roles founders ask for vs roles candidates can fill.</p>
               <ul className="space-y-2.5">
                 {gaps.map((g) => (
@@ -99,10 +103,10 @@ const AdminDashboard = () => {
                 ))}
                 {gaps.length === 0 && <li className="text-sm text-muted-foreground">No data yet.</li>}
               </ul>
-              <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border">
+              <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-white/5">
                 <strong>demand</strong> / <strong>supply</strong>. Red means more founders need this role than candidates can fill.
               </p>
-            </Card>
+            </GlassCard>
           </div>
         </div>
 
