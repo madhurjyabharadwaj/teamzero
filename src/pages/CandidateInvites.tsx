@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { AppHeader } from "@/components/AppHeader";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { AmbientBackground } from "@/components/AmbientBackground";
+import { GlassCard } from "@/components/GlassCard";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -44,15 +46,18 @@ const CandidateInvites = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <AmbientBackground />
       <AppHeader />
-      <main className="container-page py-10 flex-1 max-w-4xl">
-        <h1 className="text-3xl font-bold tracking-tight">Your invites</h1>
-        <p className="text-muted-foreground mt-2">For the demo, choose which seeded candidate you want to play. Founders' invites for that profile show up below.</p>
+      <main className="container-page py-10 md:py-14 flex-1 max-w-4xl">
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          Your <span className="text-gradient">invites</span>
+        </h1>
+        <p className="text-muted-foreground mt-3 text-lg">For the demo, choose which seeded candidate you want to play. Founders' invites for that profile show up below.</p>
 
-        <Card className="p-4 mt-6 shadow-soft">
-          <label className="text-xs uppercase tracking-wider font-medium text-muted-foreground">View as candidate</label>
+        <GlassCard hover={false} className="p-5 mt-6">
+          <label className="text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground">View as candidate</label>
           <Select value={activeCandidateId} onValueChange={setActiveCandidateId}>
-            <SelectTrigger className="mt-1.5 max-w-md"><SelectValue placeholder="Choose a profile" /></SelectTrigger>
+            <SelectTrigger className="mt-2 max-w-md bg-white/5 border-white/10"><SelectValue placeholder="Choose a profile" /></SelectTrigger>
             <SelectContent>
               {candidates.map((c) => (
                 <SelectItem key={c.id} value={c.id}>{c.name} — {c.headline}</SelectItem>
@@ -60,23 +65,23 @@ const CandidateInvites = () => {
             </SelectContent>
           </Select>
           {activeCandidate && (
-            <p className="text-xs text-muted-foreground mt-2">
+            <p className="text-xs text-muted-foreground mt-3">
               Playing: <strong className="text-foreground">{activeCandidate.name}</strong> · {activeCandidate.commitment_level} · {activeCandidate.availability_hours}h/week
             </p>
           )}
-        </Card>
+        </GlassCard>
 
         {myInvites.length === 0 ? (
-          <Card className="p-6 mt-8 text-center">
+          <GlassCard hover={false} className="p-6 mt-8 text-center">
             <p className="text-sm text-muted-foreground">No invites yet for this candidate. Switch role to Founder, build a brief that fits this profile, and send an invite.</p>
-          </Card>
+          </GlassCard>
         ) : (
           <div className="grid gap-4 mt-8">
             {myInvites.map((inv) => {
               const project = projectMap.get(inv.project_id);
               if (!project) return null;
               return (
-                <Card key={inv.id} className="shadow-soft">
+                <GlassCard key={inv.id} hover={false}>
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-3 flex-wrap">
                       <div>
@@ -95,7 +100,7 @@ const CandidateInvites = () => {
                     <ProjectCard project={project} compact />
 
                     {inv.match_reasons && inv.match_reasons.length > 0 && (
-                      <div className="bg-primary-soft/60 rounded-md p-3">
+                      <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
                         <p className="text-xs uppercase tracking-wider font-medium text-primary mb-1.5">Why you were matched</p>
                         <ul className="text-sm space-y-1 list-disc list-inside text-foreground/85">
                           {inv.match_reasons.map((r, i) => <li key={i}>{r}</li>)}
@@ -104,7 +109,7 @@ const CandidateInvites = () => {
                     )}
 
                     {inv.message && (
-                      <div className="text-sm bg-secondary/60 rounded-md p-3 border border-border">
+                      <div className="text-sm bg-white/5 rounded-lg p-3 border border-white/10">
                         <p className="text-xs uppercase tracking-wider text-muted-foreground font-medium mb-1">Message from founder</p>
                         {inv.message}
                       </div>
@@ -119,21 +124,21 @@ const CandidateInvites = () => {
                           onChange={(e) => setNotes((n) => ({ ...n, [inv.id]: e.target.value }))}
                         />
                         <div className="flex flex-wrap gap-2 justify-end">
-                          <Button variant="outline" size="sm" onClick={() => respond(inv.id, "not_a_fit")}>Not a fit</Button>
-                          <Button variant="outline" size="sm" onClick={() => respond(inv.id, "maybe_later")}>Maybe later</Button>
-                          <Button size="sm" onClick={() => respond(inv.id, "interested")}>Interested</Button>
+                          <Button variant="outline" size="sm" onClick={() => respond(inv.id, "not_a_fit")} className="border-white/15 bg-white/5">Not a fit</Button>
+                          <Button variant="outline" size="sm" onClick={() => respond(inv.id, "maybe_later")} className="border-white/15 bg-white/5">Maybe later</Button>
+                          <Button size="sm" onClick={() => respond(inv.id, "interested")} className="gradient-iridescent text-primary-foreground border-0 btn-shimmer hover:opacity-95">Interested</Button>
                         </div>
                       </>
                     ) : (
                       inv.candidate_note && (
-                        <div className="text-sm bg-primary-soft rounded-md p-3">
+                        <div className="text-sm bg-primary/10 border border-primary/20 rounded-lg p-3">
                           <p className="text-xs uppercase tracking-wider text-primary font-medium mb-1">Your note</p>
                           {inv.candidate_note}
                         </div>
                       )
                     )}
                   </CardContent>
-                </Card>
+                </GlassCard>
               );
             })}
           </div>
