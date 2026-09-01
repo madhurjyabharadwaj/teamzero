@@ -32,10 +32,6 @@ const Landing = () => {
       <main className="flex-1">
         <section className="container-page relative pt-24 pb-20 md:pt-32 md:pb-28">
           <div className="max-w-3xl animate-fade-in">
-            <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-foreground/80 bg-white/5 border border-white/10 backdrop-blur-md px-3 py-1.5 rounded-full">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary-glow shadow-[0_0_12px_hsl(var(--primary-glow))]" />
-              ESSEC pilot — demo
-            </span>
             <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight leading-[1.02]">
               Find your first teammate.
               <br />
