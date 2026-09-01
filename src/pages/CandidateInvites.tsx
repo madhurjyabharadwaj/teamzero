@@ -14,19 +14,36 @@ import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { InviteStatus, MatchLabel } from "@/lib/types";
+import { useAuth } from "@/contexts/AuthContext";
 
 const CandidateInvites = () => {
   const { data: invites = [] } = useAllInvites();
   const { data: candidates = [] } = useCandidates();
   const { data: projects = [] } = useProjects();
   const qc = useQueryClient();
+  const { user } = useAuth();
 
   const [activeCandidateId, setActiveCandidateId] = useState<string>("");
   const [notes, setNotes] = useState<Record<string, string>>({});
 
+  const myProfiles = useMemo(
+    () => candidates.filter((c) => !c.user_id || c.user_id === user?.id),
+    [candidates, user?.id],
+  );
+
   useEffect(() => {
-    if (!activeCandidateId && candidates.length > 0) setActiveCandidateId(candidates[0].id);
-  }, [candidates, activeCandidateId]);
+    if (!activeCandidateId && myProfiles.length > 0) setActiveCandidateId(myProfiles[0].id);
+  }, [myProfiles, activeCandidateId]);
+
+  const selectCandidate = async (id: string) => {
+    setActiveCandidateId(id);
+    const candidate = candidates.find((c) => c.id === id);
+    if (!user || !candidate || candidate.user_id) return;
+    const { error } = await supabase.from("candidates").update({ user_id: user.id }).eq("id", id);
+    if (error) { toast.error("Could not link this profile to your account"); return; }
+    qc.invalidateQueries({ queryKey: ["candidates"] });
+    qc.invalidateQueries({ queryKey: ["invites"] });
+  };
 
   const projectMap = useMemo(() => new Map(projects.map((p) => [p.id, p])), [projects]);
   const myInvites = useMemo(
@@ -56,10 +73,10 @@ const CandidateInvites = () => {
 
         <GlassCard hover={false} className="p-5 mt-6">
           <label className="text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground">View as candidate</label>
-          <Select value={activeCandidateId} onValueChange={setActiveCandidateId}>
+          <Select value={activeCandidateId} onValueChange={selectCandidate}>
             <SelectTrigger className="mt-2 max-w-md bg-white/5 border-white/10"><SelectValue placeholder="Choose a profile" /></SelectTrigger>
             <SelectContent>
-              {candidates.map((c) => (
+              {myProfiles.map((c) => (
                 <SelectItem key={c.id} value={c.id}>{c.name} — {c.headline}</SelectItem>
               ))}
             </SelectContent>

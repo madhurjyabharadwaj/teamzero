@@ -1,5 +1,6 @@
 export type Candidate = {
   id: string;
+  user_id?: string | null;
   name: string;
   headline: string;
   essec_status: string;
@@ -18,6 +19,7 @@ export type Candidate = {
 
 export type Project = {
   id: string;
+  owner_id?: string | null;
   founder_name: string;
   title: string;
   pitch: string;
