@@ -71,7 +71,7 @@ const MatchResults = () => {
         </Button>
         <div className="mt-4 flex items-end justify-between gap-4 flex-wrap animate-fade-in">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
               Matches for <span className="text-gradient">{project.title}</span>
             </h1>
             <p className="text-muted-foreground mt-3">
