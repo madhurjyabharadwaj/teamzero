@@ -62,7 +62,7 @@ const ShortlistInvites = () => {
         <Button variant="ghost" size="sm" onClick={() => navigate(`/founder/project/${project.id}/matches`)}>
           <ArrowLeft className="h-4 w-4 mr-1" /> Back to matches
         </Button>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mt-4">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight mt-4">
           Shortlist & <span className="text-gradient">invites</span>
         </h1>
         <p className="text-muted-foreground mt-3 text-lg">{project.title}</p>

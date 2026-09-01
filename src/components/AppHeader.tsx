@@ -26,7 +26,7 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-white/5 bg-background/40 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="group flex items-center gap-2.5 font-bold text-lg">
+        <Link to="/" className="group flex items-center gap-2.5 font-normal text-lg">
           <span className="relative grid h-9 w-9 place-items-center rounded-xl gradient-iridescent text-primary-foreground shadow-glow">
             <Layers className="h-4 w-4 relative z-10" />
           </span>

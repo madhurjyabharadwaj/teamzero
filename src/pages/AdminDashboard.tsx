@@ -42,7 +42,7 @@ const AdminDashboard = () => {
       <AmbientBackground />
       <AppHeader />
       <main className="container-page py-10 md:py-14 flex-1">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
           Admin <span className="text-gradient">dashboard</span>
         </h1>
         <p className="text-muted-foreground mt-3 text-lg">Track activity, outcomes, and where the ecosystem is short on supply.</p>

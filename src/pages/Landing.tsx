@@ -32,7 +32,7 @@ const Landing = () => {
       <main className="flex-1">
         <section className="container-page relative pt-24 pb-20 md:pt-32 md:pb-28">
           <div className="max-w-3xl animate-fade-in">
-            <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight leading-[1.02]">
+            <h1 className="mt-6 text-5xl md:text-7xl font-normal tracking-tight leading-[1.02]">
               Find your first teammate.
               <br />
               <span className="text-gradient">Not your hundredth contact.</span>
@@ -87,7 +87,7 @@ const Landing = () => {
         <section className="relative border-t border-white/5">
           <div className="container-page py-20 md:py-24 text-center relative">
             <Reveal>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+              <h2 className="text-3xl md:text-5xl font-normal tracking-tight">
                 Built for serious{" "}
                 <span className="text-gradient">first conversations.</span>
               </h2>

@@ -24,7 +24,7 @@ const RoleSelection = () => {
       <AppHeader />
       <main className="container-page py-16 md:py-20 flex-1">
         <div className="max-w-2xl animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-normal tracking-tight">
             Pick a role to <span className="text-gradient">demo</span>
           </h1>
           <p className="mt-4 text-muted-foreground text-lg">

@@ -66,7 +66,7 @@ const CandidateInvites = () => {
       <AmbientBackground />
       <AppHeader />
       <main className="container-page py-10 md:py-14 flex-1 max-w-4xl">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
           Your <span className="text-gradient">invites</span>
         </h1>
         <p className="text-muted-foreground mt-3 text-lg">For the demo, choose which seeded candidate you want to play. Founders' invites for that profile show up below.</p>

@@ -19,7 +19,7 @@ const ProjectPreview = () => {
           <ArrowLeft className="h-4 w-4 mr-1" /> Edit brief
         </Button>
         <div className="mt-4 animate-fade-in">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-normal tracking-tight">
             Here's how candidates will see your <span className="text-gradient">project</span>
           </h1>
           <p className="text-muted-foreground mt-3 text-lg">This is a preview of your structured brief. Generate matches when it looks right.</p>
