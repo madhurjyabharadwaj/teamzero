@@ -13,6 +13,9 @@ import ShortlistInvites from "./pages/ShortlistInvites.tsx";
 import CandidateInvites from "./pages/CandidateInvites.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
 import { RoleProvider } from "./contexts/RoleContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { RequireAuth } from "./components/RequireAuth";
+import Auth from "./pages/Auth.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,20 +25,23 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <AuthProvider>
         <RoleProvider>
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/role" element={<RoleSelection />} />
-            <Route path="/founder/brief" element={<FounderBrief />} />
-            <Route path="/founder/project/:projectId" element={<ProjectPreview />} />
-            <Route path="/founder/project/:projectId/matches" element={<MatchResults />} />
-            <Route path="/founder/project/:projectId/shortlist" element={<ShortlistInvites />} />
-            <Route path="/candidate/invites" element={<CandidateInvites />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/role" element={<RequireAuth><RoleSelection /></RequireAuth>} />
+            <Route path="/founder/brief" element={<RequireAuth><FounderBrief /></RequireAuth>} />
+            <Route path="/founder/project/:projectId" element={<RequireAuth><ProjectPreview /></RequireAuth>} />
+            <Route path="/founder/project/:projectId/matches" element={<RequireAuth><MatchResults /></RequireAuth>} />
+            <Route path="/founder/project/:projectId/shortlist" element={<RequireAuth><ShortlistInvites /></RequireAuth>} />
+            <Route path="/candidate/invites" element={<RequireAuth><CandidateInvites /></RequireAuth>} />
+            <Route path="/admin" element={<RequireAuth><AdminDashboard /></RequireAuth>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </RoleProvider>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

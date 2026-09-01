@@ -12,6 +12,7 @@ import { TagInput } from "@/components/TagInput";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { useRole } from "@/contexts/RoleContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -127,6 +128,7 @@ const FounderBrief = () => {
       .from("projects")
       .insert({
         ...state,
+        owner_id: user?.id ?? null,
         target_users: state.target_users || null,
         progress: state.progress || null,
         timeline: state.timeline || null,
