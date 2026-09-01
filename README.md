@@ -1,22 +1,22 @@
 # TeamZero
 
-A founder-teammate matching MVP for the ESSEC entrepreneurship ecosystem. Founders write a structured project brief, get ranked and explained candidate recommendations, shortlist and invite people, and track whether a real conversation happened.
+A founder-teammate matching MVP for early-stage builders. Founders write a structured project brief, get ranked and explained candidate recommendations, shortlist and invite people, and track whether a real conversation happened.
 
 **Live demo:** https://teamzero.lovable.app
 
-Built as the product deliverable for Advanced Steps in Entrepreneurship at ESSEC Business School. This is a demo MVP with seeded data and mock authentication, not a production system. The point was to test whether structured, explainable matching changes founder behaviour, so the data model was written to survive a migration to a real pilot rather than to be thrown away.
+This demo MVP uses seeded data to test whether structured, explainable matching changes founder behaviour. Its data model is designed to support a real pilot rather than be thrown away.
 
 ---
 
 ## The problem
 
-ESSEC students with early-stage ideas usually have a gap in the founding team and no good way to close it. They ask friends, post in WhatsApp groups, message people on LinkedIn, or wait for the next event. Each of these fails for a different reason: the friend circle is too small and too similar, group posts carry no signal about seriousness, LinkedIn outreach is cold and slow, and events are episodic.
+People with early-stage ideas often have a gap in the founding team and no good way to close it. They ask friends, post in online groups, message people on professional networks, or wait for the next event. Each of these fails for a different reason: the friend circle is too small and too similar, group posts carry no signal about seriousness, cold outreach is slow, and events are episodic.
 
 The pain is more specific than "I cannot find people". It is:
 
 > I cannot quickly find people who are complementary, serious, available, interested in my problem space, and open to the kind of collaboration I need.
 
-TeamZero optimises for one outcome only: creating serious founder-teammate conversations. It is deliberately not a networking app, a student directory, or a job board.
+TeamZero optimises for one outcome only: creating serious founder-teammate conversations. It is deliberately not a networking app, a public directory, or a job board.
 
 ## Who it is for
 
@@ -24,7 +24,7 @@ TeamZero optimises for one outcome only: creating serious founder-teammate conve
 |---|---|---|
 | Phase-zero founder | One to three serious people worth talking to | "I found 3 relevant profiles and booked an intro call" |
 | Candidate / potential teammate | Relevant projects where their skills matter, with clear expectations | "I know exactly why I was invited" |
-| Admin / programme operator | Visibility into pipeline, match quality, and role gaps | "I can see which projects are blocked by a missing role" |
+| Admin / community operator | Visibility into pipeline, match quality, and role gaps | "I can see which projects are blocked by a missing role" |
 
 ## How the matching works
 
@@ -66,7 +66,7 @@ Being honest about this matters more than pretending the demo is a product.
 
 Real: the matching engine, the scoring weights and hard filters, the reason generation, the data model, the state transitions across brief, match, invite, response and outcome.
 
-Mocked: authentication is role selection with no password. The candidate pool is 12 to 20 seeded profiles covering AI/data, no-code, UX/UI, product, GTM, sales, ops, domain expert and alumni advisor. Invites are simulated rather than emailed. Persistence is client state, with the schema written so that a Supabase migration is a swap of the persistence layer rather than a rewrite.
+Mocked: the candidate pool is 12 to 20 seeded profiles covering AI/data, no-code, UX/UI, product, GTM, sales, ops, domain experts and advisors. Invites are simulated rather than emailed.
 
 Out of scope on purpose: in-app chat, real email infrastructure, equity or legal agreements, payments, public profile pages, and any ML-based matching.
 

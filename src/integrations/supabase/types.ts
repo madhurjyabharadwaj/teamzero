@@ -19,14 +19,14 @@ export type Database = {
           availability_hours: number
           commitment_level: string
           created_at: string
-          essec_status: string
+          experience_level: string | null
           headline: string
           id: string
           interests: string[]
           motivation: string | null
           name: string
           open_to: string[]
-          program_year: string | null
+          professional_background: string
           proof_of_work: string[]
           role_fits: string[]
           skills: string[]
@@ -37,14 +37,14 @@ export type Database = {
           availability_hours?: number
           commitment_level: string
           created_at?: string
-          essec_status: string
+          experience_level?: string | null
           headline: string
           id?: string
           interests?: string[]
           motivation?: string | null
           name: string
           open_to?: string[]
-          program_year?: string | null
+          professional_background: string
           proof_of_work?: string[]
           role_fits?: string[]
           skills?: string[]
@@ -55,14 +55,14 @@ export type Database = {
           availability_hours?: number
           commitment_level?: string
           created_at?: string
-          essec_status?: string
+          experience_level?: string | null
           headline?: string
           id?: string
           interests?: string[]
           motivation?: string | null
           name?: string
           open_to?: string[]
-          program_year?: string | null
+          professional_background?: string
           proof_of_work?: string[]
           role_fits?: string[]
           skills?: string[]

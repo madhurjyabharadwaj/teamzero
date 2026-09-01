@@ -76,7 +76,9 @@ function buildReasons(
 
   // ensure at least 2 reasons
   if (reasons.length < 2) {
-    if (candidate.essec_status) reasons.push(`${candidate.essec_status}${candidate.program_year ? ` · ${candidate.program_year}` : ""}`);
+    if (candidate.professional_background) {
+      reasons.push(`${candidate.professional_background}${candidate.experience_level ? ` · ${candidate.experience_level}` : ""}`);
+    }
   }
   return reasons.slice(0, 4);
 }
