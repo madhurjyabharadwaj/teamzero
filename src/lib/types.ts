@@ -3,8 +3,8 @@ export type Candidate = {
   user_id?: string | null;
   name: string;
   headline: string;
-  essec_status: string;
-  program_year: string | null;
+  professional_background: string;
+  experience_level: string | null;
   role_fits: string[];
   skills: string[];
   interests: string[];

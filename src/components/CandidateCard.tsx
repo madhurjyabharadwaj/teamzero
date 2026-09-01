@@ -5,7 +5,7 @@ import { MatchReasonList } from "@/components/MatchReasonList";
 import type { Match } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/GlassCard";
-import { Clock, GraduationCap } from "lucide-react";
+import { BriefcaseBusiness, Clock } from "lucide-react";
 
 type Props = {
   match: Match;
@@ -24,8 +24,8 @@ export function CandidateCard({ match, action, secondaryAction }: Props) {
             <p className="text-sm text-muted-foreground mt-0.5">{c.headline}</p>
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1">
-                <GraduationCap className="h-3.5 w-3.5" /> {c.essec_status}
-                {c.program_year ? ` · ${c.program_year}` : ""}
+                <BriefcaseBusiness className="h-3.5 w-3.5" /> {c.professional_background}
+                {c.experience_level ? ` · ${c.experience_level}` : ""}
               </span>
               <span className="inline-flex items-center gap-1">
                 <Clock className="h-3.5 w-3.5" /> {c.availability_hours}h/week · {c.commitment_level}

@@ -38,7 +38,7 @@ const Landing = () => {
               <span className="text-gradient">Not your hundredth contact.</span>
             </h1>
             <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-              TeamZero helps phase-zero ESSEC founders move from <em className="text-foreground/80 not-italic">"I have an idea but no team"</em>{" "}
+              TeamZero helps phase-zero founders move from <em className="text-foreground/80 not-italic">"I have an idea but no team"</em>{" "}
               to <em className="text-foreground/80 not-italic">"I have a few serious people worth speaking to."</em> Structured briefs, explainable matching, no infinite feed.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -92,7 +92,7 @@ const Landing = () => {
                 <span className="text-gradient">first conversations.</span>
               </h2>
               <p className="mt-5 text-muted-foreground max-w-2xl mx-auto text-lg">
-                No public profiles. No social feed. No DM spam. Just structured matching inside a trusted ESSEC context.
+                No public profiles. No social feed. No DM spam. Just structured matching built around skills, intent, and trust.
               </p>
               <Button
                 asChild
