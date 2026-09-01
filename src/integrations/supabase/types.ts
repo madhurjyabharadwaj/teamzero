@@ -30,6 +30,7 @@ export type Database = {
           proof_of_work: string[]
           role_fits: string[]
           skills: string[]
+          user_id: string | null
           working_style: string[]
         }
         Insert: {
@@ -47,6 +48,7 @@ export type Database = {
           proof_of_work?: string[]
           role_fits?: string[]
           skills?: string[]
+          user_id?: string | null
           working_style?: string[]
         }
         Update: {
@@ -64,6 +66,7 @@ export type Database = {
           proof_of_work?: string[]
           role_fits?: string[]
           skills?: string[]
+          user_id?: string | null
           working_style?: string[]
         }
         Relationships: []
@@ -137,6 +140,7 @@ export type Database = {
           ideal_teammate: string | null
           industry: string
           not_fit_if: string | null
+          owner_id: string | null
           pitch: string
           problem: string
           progress: string | null
@@ -159,6 +163,7 @@ export type Database = {
           ideal_teammate?: string | null
           industry: string
           not_fit_if?: string | null
+          owner_id?: string | null
           pitch: string
           problem: string
           progress?: string | null
@@ -181,6 +186,7 @@ export type Database = {
           ideal_teammate?: string | null
           industry?: string
           not_fit_if?: string | null
+          owner_id?: string | null
           pitch?: string
           problem?: string
           progress?: string | null
@@ -199,7 +205,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_candidate: { Args: { _candidate_id: string }; Returns: boolean }
+      owns_project: { Args: { _project_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
