@@ -107,7 +107,7 @@ const Landing = () => {
       </main>
       <footer className="border-t border-white/5">
         <div className="container-page py-6 flex items-center justify-between text-sm text-muted-foreground">
-          <span>TeamZero · Classroom MVP</span>
+          <span>TeamZero | MVP</span>
           <span>All profiles and data are demo content.</span>
         </div>
       </footer>
