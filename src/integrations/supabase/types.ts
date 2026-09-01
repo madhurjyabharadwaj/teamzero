@@ -205,6 +205,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_candidate_profile: {
+        Args: { _candidate_id: string }
+        Returns: string
+      }
       is_candidate: { Args: { _candidate_id: string }; Returns: boolean }
       owns_project: { Args: { _project_id: string }; Returns: boolean }
     }

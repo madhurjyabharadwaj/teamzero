@@ -39,8 +39,8 @@ const CandidateInvites = () => {
     setActiveCandidateId(id);
     const candidate = candidates.find((c) => c.id === id);
     if (!user || !candidate || candidate.user_id) return;
-    const { error } = await supabase.from("candidates").update({ user_id: user.id }).eq("id", id);
-    if (error) { toast.error("Could not link this profile to your account"); return; }
+    const { error } = await supabase.rpc("claim_candidate_profile", { _candidate_id: id });
+    if (error) { toast.error(error.message || "Could not link this profile to your account"); return; }
     qc.invalidateQueries({ queryKey: ["candidates"] });
     qc.invalidateQueries({ queryKey: ["invites"] });
   };
